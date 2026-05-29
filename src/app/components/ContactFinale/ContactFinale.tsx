@@ -8,7 +8,7 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/tanisha-sharma-81b329321/';
 const GITHUB_URL   = 'https://github.com/Tanisharma122';
 const EMAIL_MAILTO = 'mailto:tanisharma0311@gmail.com';
 const WHATSAPP_URL = 'https://wa.me/919999999999'; // standard api hook placeholder
-const RESUME_PDF   = '/assets/Tanisha_Sharma_Resume___IIMA.pdf';
+const RESUME_PDF   = '/assets/tanisha_sharma_resume.pdf';
 const GOOGLE_SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxIUe-ugBMmK0JYECFBs9eUlzuGq_fq4yF0IsCgQKkvLGFX0NENESln24jB_I_Y7BQO/exec';
 
 // ── Flat Palette Colors ─────────────────────────────────────────────
