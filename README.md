@@ -1,5 +1,7 @@
 # Tanisha Sharma Portfolio
 
+![Tanisha Sharma Portfolio Cover Preview](./public/assets/tanisha-banner.png)
+
 An immersive, production-ready cinematic creative web portfolio showcasing state-of-the-art interactive systems, real-time gesture-driven environments, and machine learning research projects.
 
 ---
