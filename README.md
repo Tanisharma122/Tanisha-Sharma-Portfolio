@@ -28,35 +28,6 @@ The entire project is engineered using a highly performant, modern frontend and 
 
 ---
 
-## 🌌 Interactive Creative Labs Summary
-
-### 1. Kinetic Air Canvas (`AirCanvasLab.tsx`)
-A gesture-driven 2D space canvas layered above your live mirrored webcam video feed:
-* **Smoothing & Precision**: Integrates a dual LERP-smoothing pipeline (primary hand coordinates mapping LERP at `0.32` and secondary drawing stroke LERP at `0.16`) to fully eliminate high-frequency hand jittering, providing a smooth writing experience.
-* **Particle Brush Mode**: Discards traditional solid paths in favor of highly dense, glowing circular particle streams.
-* **High-Contrast Masking**: Toggles an advanced dual-pass HSL Rainbow Brush, which draws a clean background masking layer behind the glowing rainbow segments to act as a clear border outline exclusively on letter boundaries, maximizing visibility against light webcams.
-* **Biometric skeleton**: Superimposes a real-time double-filtered glowing cyan and white hand skeleton mesh tracking every joint node.
-* **Zero-Interruption Stream**: decouple state switches (eraser toggle, paint colors, stroke weights) from the MediaPipe thread using persistent React Refs, keeping camera preview and tracking active without stream tear-down or lag.
-
-### 2. Interactive Particle Galaxy (`ParticleGalaxyLab.tsx`)
-A Three.js WebGL parametric shape-shifting engine controlling over 8,000 spatial vectors:
-* **Parametric Geometries**:
-  - **Shape 01 (Cosmic Sphere)**: A thin 3D spherical shell with an intense monochromatic violet/deep purple core mix.
-  - **Shape 02 (Constellation Star)**: A highly geometric 5-pointed star featuring sharp, high-contrast arms (cyan/gold highlights).
-  - **Shape 03 (Holographic Flower)**: A revolving 12-petaled rose curve ($r = \cos(6 \cdot \theta)$) with a dynamic 3D helical petal wave ($z = \sin(4 \cdot \theta) \cdot 0.2$), color-mapped to shifting rainbow waves.
-* **Gesture-Controlled Interpolation**:
-  - **Closed Fist / Pinch**: Morphs the field smoothly into the **Cosmic Sphere**.
-  - **Five-Finger Cluster** (`avgDist < 0.056`): Transitions the particles into the sharp **Constellation Star**.
-  - **Open Palm Spread** (`avgDist > 0.096`): Blossoms the vectors outwards into the **Holographic Flower**.
-* **Liquid Vertex Transition**: Applies linear interpolations (LERP) inside the requestAnimationFrame loop at a speed factor of `0.06`, smoothly blending positions and color tracks during transitions.
-
-### 3. Rigid-Body Cascading Contact Dock (`ContactFinale.tsx`)
-A highly responsive 2D physics sandbox integrated into the final contact form:
-* **CASI Engine**: Coordinates multi-body collisions, gravity vectors (`0.24`), dampening friction (`0.988`), and bouncy restitution (`0.58`) for 190 stylized shape primitives (donuts, pills, squorcles, bubbly stars, circles).
-* **Interactive Grab Mechanics**: Allows users to interactively click, grab, throw, and disrupt the particle pile-up using mouse-dragging coordinate offsets.
-
----
-
 ## 🏃 Local Setup & Development
 
 Ensure you have [Node.js](https://nodejs.org/) installed on your system.
@@ -131,3 +102,24 @@ Ensure you have [Node.js](https://nodejs.org/) installed on your system.
 ### 3. Current Engagements
 * **Subject**: Research & Robotics
 * **Details**: Actively expanding into core engineering domains through advanced AI research initiatives and autonomous robotics development.
+
+---
+
+## 🌌 Interactive Creative Labs Summary
+
+### 1. Kinetic Air Canvas (`AirCanvasLab.tsx`)
+A gesture-driven 2D space canvas layered above your live mirrored webcam video feed:
+* **Double LERP-Smoothing**: Primary mapping LERP at `0.32` and secondary drawing path LERP at `0.16` for jitter-free writing.
+* **Particle Brush**: Dense, glowing circular particle streams instead of solid paths.
+* **Dual-Pass Border Masking**: Generates a stark white outline boundary behind the HSL Rainbow Brush to keep strokes crisp on bright webcams.
+* **Ref Decoupling**: Configuration states are stored in React Refs, keeping MediaPipe tracking alive without camera re-initialization lag.
+
+### 2. Interactive Particle Galaxy (`ParticleGalaxyLab.tsx`)
+A 3D Three.js WebGL parametric shape-shifting engine managing over 8,000 particles:
+* **Parametric Targets**: Shift particles smoothly (LERP at `0.06`) between three structures: a thin monochromatic **Cosmic Sphere**, a sharp dual-accent **Constellation Star**, and a revolving 3D helical **Holographic Flower** ($r = \cos(6 \cdot \theta)$).
+* **Biometric Gestures**: Closed Fist triggers the Sphere, Five-Finger bunch triggers the Star, and Open Palm blossoms the Flower.
+
+### 3. Rigid-Body Contact Dock (`ContactFinale.tsx`)
+A responsive 2D physics sandbox built directly into the form footer:
+* **Physics Engine**: Calculates collisions, friction (`0.988`), and bouncy restitution (`0.58`) for 190 cascading modern primitives (starbursts, squorcles, pills, donuts).
+* **Cursor Throw Forces**: Allows users to interactively drag, fling, and disrupt the dynamic particle pile-up.
