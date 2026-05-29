@@ -8,6 +8,7 @@ An immersive, production-ready cinematic creative web portfolio showcasing state
 
 ## 🚀 Live Demo & Interactive Sandbox
 Experience the live immersive components and creative labs directly on your browser.
+* **Live Deployed Portfolio**: [tanisha-sharma-portfolio.vercel.app](https://tanisha-sharma-portfolio.vercel.app/)
 * **GitHub Repository**: [Tanisha-Sharma-Portfolio](https://github.com/Tanisharma122/Tanisha-Sharma-Portfolio)
 * **LinkedIn Profile**: [Tanisha Sharma on LinkedIn](https://www.linkedin.com/in/tanisha-sharma-81b329321/)
 * **Email Inquiry Address**: [tanisharma0311@gmail.com](mailto:tanisharma0311@gmail.com)
