@@ -85,41 +85,8 @@ Ensure you have [Node.js](https://nodejs.org/) installed on your system.
 └── tsconfig.json
 ```
 
----
+## 🤝 Collaboration & Future Initiatives
 
-## 🎓 Career History & Chronology
+I am an ambitious Computer Engineering student and research-oriented AI/ML developer deeply passionate about expanding into core engineering domains, advanced AI research initiatives, and autonomous robotics development.
 
-### 1. AI/ML Engineering Intern
-* **Organization**: The Special Character (Ahmedabad, India)
-* **Duration**: Dec 2025 — Feb 2026 (On-Site)
-* **Details**: Engineered live computer vision model architectures and constructed real-world machine learning automated pipelines to optimize system throughput.
-
-### 2. Core AI/ML Research Fellow
-* **Organization**: IEEE EMBS Student Internship Program
-* **Duration**: June 2025 — July 2025 (Remote)
-* **Details**: Deployed advanced predictive AI prototypes specializing in Schizophrenia Detection using medical datasets and deep statistical modeling.
-
-### 3. Current Engagements
-* **Subject**: Research & Robotics
-* **Details**: Actively expanding into core engineering domains through advanced AI research initiatives and autonomous robotics development.
-
----
-
-## 🌌 Interactive Creative Labs Summary
-
-### 1. Kinetic Air Canvas (`AirCanvasLab.tsx`)
-A gesture-driven 2D space canvas layered above your live mirrored webcam video feed:
-* **Double LERP-Smoothing**: Primary mapping LERP at `0.32` and secondary drawing path LERP at `0.16` for jitter-free writing.
-* **Particle Brush**: Dense, glowing circular particle streams instead of solid paths.
-* **Dual-Pass Border Masking**: Generates a stark white outline boundary behind the HSL Rainbow Brush to keep strokes crisp on bright webcams.
-* **Ref Decoupling**: Configuration states are stored in React Refs, keeping MediaPipe tracking alive without camera re-initialization lag.
-
-### 2. Interactive Particle Galaxy (`ParticleGalaxyLab.tsx`)
-A 3D Three.js WebGL parametric shape-shifting engine managing over 8,000 particles:
-* **Parametric Targets**: Shift particles smoothly (LERP at `0.06`) between three structures: a thin monochromatic **Cosmic Sphere**, a sharp dual-accent **Constellation Star**, and a revolving 3D helical **Holographic Flower** ($r = \cos(6 \cdot \theta)$).
-* **Biometric Gestures**: Closed Fist triggers the Sphere, Five-Finger bunch triggers the Star, and Open Palm blossoms the Flower.
-
-### 3. Rigid-Body Contact Dock (`ContactFinale.tsx`)
-A responsive 2D physics sandbox built directly into the form footer:
-* **Physics Engine**: Calculates collisions, friction (`0.988`), and bouncy restitution (`0.58`) for 190 cascading modern primitives (starbursts, squorcles, pills, donuts).
-* **Cursor Throw Forces**: Allows users to interactively drag, fling, and disrupt the dynamic particle pile-up.
+If you are looking to collaborate, build innovative open-source systems, share ideas, or explore research proposals, feel free to reach out and connect! Let's combine our skills to pioneer the next generation of intelligent, interactive technology. ✨
