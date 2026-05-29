@@ -29,14 +29,71 @@ export default function VideoIntro() {
     };
   }, []);
 
+  // Keep blur video in sync with main video to prevent visual drift
+  useEffect(() => {
+    const syncInterval = setInterval(() => {
+      const main = mainVideoRef.current;
+      const blur = blurVideoRef.current;
+      if (main && blur && Math.abs(main.currentTime - blur.currentTime) > 0.3) {
+        blur.currentTime = main.currentTime;
+      }
+    }, 5000);
+
+    return () => clearInterval(syncInterval);
+  }, []);
+
+  // Pause video & mute audio when hero scrolls out of view;
+  // resume & restore audio when scrolling back to hero
+  const wasMutedBeforeLeave = useRef(true);
+  const wasPlayingBeforeLeave = useRef(true);
+
+  useEffect(() => {
+    const wrapper = mainVideoRef.current?.closest(`.${styles.videoWrapper}`);
+    if (!wrapper) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const video = mainVideoRef.current;
+        const blur = blurVideoRef.current;
+        if (!video) return;
+
+        if (!entry.isIntersecting) {
+          // Scrolled away — save state, pause, and mute
+          wasMutedBeforeLeave.current = video.muted;
+          wasPlayingBeforeLeave.current = !video.paused;
+          video.muted = true;
+          video.pause();
+          blur?.pause();
+          setIsPlaying(false);
+        } else {
+          // Scrolled back — restore previous state
+          video.muted = wasMutedBeforeLeave.current;
+          setIsMuted(wasMutedBeforeLeave.current);
+          if (wasPlayingBeforeLeave.current) {
+            if (blur) {
+              blur.currentTime = video.currentTime;
+              blur.play();
+            }
+            video.play();
+            setIsPlaying(true);
+          }
+        }
+      },
+      { threshold: 0.3 } // Trigger when 30% of hero is visible/hidden
+    );
+
+    observer.observe(wrapper);
+    return () => observer.disconnect();
+  }, []);
+
   const handleMuteToggle = useCallback(() => {
     const video = mainVideoRef.current;
-    const blurVideo = blurVideoRef.current;
     if (!video) return;
 
     const newMuted = !video.muted;
     video.muted = newMuted;
-    if (blurVideo) blurVideo.muted = newMuted;
+    // Blur video is purely decorative — always stays muted to prevent
+    // dual-audio echo/phasing that distorts the voice track
     setIsMuted(newMuted);
   }, []);
 
@@ -46,8 +103,12 @@ export default function VideoIntro() {
     if (!video) return;
 
     if (video.paused) {
+      // Sync blur video position to main video before resuming
+      if (blurVideo) {
+        blurVideo.currentTime = video.currentTime;
+        blurVideo.play();
+      }
       video.play();
-      blurVideo?.play();
       setIsPlaying(true);
     } else {
       video.pause();
@@ -68,6 +129,7 @@ export default function VideoIntro() {
         playsInline
         muted
         aria-hidden="true"
+        onError={() => {/* video not yet placed — silent */}}
       />
 
       {/* Primary fullscreen video */}
@@ -79,6 +141,7 @@ export default function VideoIntro() {
         loop
         playsInline
         muted
+        onError={() => {/* video not yet placed — silent */}}
       />
 
       {/* Cinematic gradient mask */}

@@ -1,0 +1,15 @@
+/* Fixed overlay — covers full viewport, pointer-events none always */
+.canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
+  pointer-events: none;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  /* Mix-blend-mode: screen makes the fluid glow ON TOP of dark sections beautifully */
+  mix-blend-mode: screen;
+}

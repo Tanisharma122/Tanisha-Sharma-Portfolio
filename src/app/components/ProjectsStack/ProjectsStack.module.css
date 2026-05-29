@@ -1,0 +1,411 @@
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 520vh; /* Tight scroll track — ends right after 5th card */
+  background: #000000; /* Pure bold absolute black background */
+}
+
+.viewportFrame {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.eyebrowContainer {
+  position: absolute;
+  top: clamp(40px, 6vh, 80px);
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 clamp(24px, 8vw, 120px);
+  z-index: 100;
+  pointer-events: none;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: clamp(10px, 1.1vw, 12px);
+  font-weight: 500;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: #e0e0e0;
+  display: inline-block;
+  opacity: 0.95;
+  text-shadow: none;
+}
+
+/* ── DECK WRAPPER ───────────────────────────────────────────────────── */
+.deckWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1360px; /* Expanded horizontal wrapper width */
+  height: clamp(620px, 85vh, 820px); /* Adjusted to fit the newly structured footer space */
+  margin: 0 auto 0;
+  padding: 0 clamp(16px, 4vw, 60px); /* Reduced margins to widen breadth size */
+  z-index: 10;
+}
+
+/* ── STACKED CARD DESIGN ──────────────────────────────────────────── */
+.projectCard {
+  position: absolute;
+  inset: 0 clamp(16px, 4vw, 60px); /* Wider horizontal project boxes */
+  height: 100%;
+  border-radius: 32px; /* Wide, sweeping rounded corners */
+  background: rgba(4, 4, 6, 0.96); /* Bold absolute black card background */
+  border: 2px solid rgba(255, 255, 255, 0.7); /* Bold highly visible white border line */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.85); /* Deep micro ambient drop-shadow layers */
+  display: flex;
+  flex-direction: column;
+  padding: 3.5rem; /* Ample internal padding matching bento spec */
+  transform-origin: center top;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+}
+
+/* ── CARD HEADER ─────────────────────────────────────────────────── */
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  flex-shrink: 0;
+}
+
+.headerMain {
+  display: flex;
+  align-items: center;
+}
+
+.serialNum {
+  font-family: 'Inter', 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 5.8rem; /* Drastically scaled-up serial number size */
+  font-weight: 900;
+  color: #f1f5f9; /* Bright bold white */
+  line-height: 1.0;
+  margin-right: 1.8rem;
+  letter-spacing: -0.05em;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.projectTitle {
+  font-family: 'Inter', 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 1.9rem; /* Compact and shorter than the massive serial number */
+  font-weight: 900; /* Ultra-bold typography scale */
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.projectBrief {
+  font-family: 'Inter', 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 0.98rem;
+  font-weight: 600; /* Bolder readable description text */
+  line-height: 1.55;
+  color: #ffffff; /* slate gray legible description sentence */
+  margin: 0;
+  max-width: 850px;
+}
+
+/* ── ASYMMETRICAL THREE-IMAGE BENTO LAYOUT ───────────────────────── */
+.bentoBody {
+  display: grid;
+  grid-template-columns: 1fr 1.8fr; /* Left Column 1fr (stacked snaps), Right Column 1.8fr (dominant canvas) */
+  gap: 16px;
+  flex: 1;
+  min-height: 0; /* Enable grid elements scaling */
+  margin-bottom: 24px;
+}
+
+/* Left Column: Stack of two smaller snapshot containers */
+.leftColStacked {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Right Column: One massive dominant system preview canvas */
+.rightColMassive {
+  height: 100%;
+  min-height: 0;
+}
+
+/* Image 1: Main Architecture Showcase Canvas */
+.mainCanvas {
+  position: relative;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  box-shadow: inset 0 10px 40px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Tech scanlines overlays */
+.mainCanvas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.01) 50%,
+    transparent 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.mainCanvas::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px dashed rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Image 2: Secondary Snapshot preview frame */
+.secondarySnap1,
+.secondarySnap2 {
+  position: relative;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 0;
+}
+
+.secondarySnap1::after,
+.secondarySnap2::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px dashed rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Real project images inside bento grid */
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  position: relative;
+  z-index: 2;
+  border-radius: 16px; /* Match outer box curve by default */
+}
+
+/* Small boxes — both top and bottom equal styling */
+.secondarySnap1 .cardImage,
+.secondarySnap2 .cardImage {
+  object-fit: contain;
+  background: #0a0a14;
+  padding: 4px;
+  border-radius: 12px; /* 16px box - 4px padding = 12px curve */
+}
+
+/* Main big box — full cover, centered on robot */
+.mainCanvas .cardImage {
+  object-fit: contain;
+  object-position: center center;
+  background: rgba(0, 0, 0, 0.4); /* subtle dark backdrop for letterboxing */
+  padding: 8px; /* slight padding so it doesn't touch the borders */
+  border-radius: 10px; /* 16px box - 8px padding approx = 10px curve */
+}
+
+/* ── COMPONENT FOOTER ────────────────────────────────────────────── */
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Specific tech stack tags on the bottom left */
+.footerTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footerTag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800; /* Bolder font weight */
+  color: #ffffff; /* white text */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+  padding: 5px 14px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Sleek GitHub action button on the bottom right */
+.githubIcon {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+  font-size: 20px;
+  z-index: 50; /* Ensure it stays above images and bento layout */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.githubIcon:hover {
+  background: rgba(85,85,85,0.15);
+  border-color: rgba(85,85,85,0.45);
+  color: #fff;
+  transform: scale(1.08);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(85,85,85,0.2);
+}
+
+/* Abstract placeholder labels */
+.placeholderBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 2;
+  color: rgba(200, 192, 230, 0.35);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  gap: 10px;
+}
+
+.placeholderIcon {
+  font-size: 22px;
+  filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.15));
+  opacity: 0.55;
+  animation: floatIcon 4s ease-in-out infinite;
+}
+
+.placeholderIconLarge {
+  font-size: 38px;
+  filter: drop-shadow(0 0 16px rgba(0, 0, 0, 0.2));
+  opacity: 0.55;
+  margin-bottom: 8px;
+  animation: floatIcon 4.5s ease-in-out infinite;
+}
+
+/* Floating animation inside grids */
+@keyframes floatIcon {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 0.75;
+  }
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .deckWrapper {
+    height: 78vh;
+  }
+
+  .projectCard {
+    padding: 28px;
+    border-radius: 20px;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .viewRepoBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .titleBlock {
+    margin-left: 0;
+  }
+
+  .serialNum {
+    font-size: 3.5rem; /* compact serial number on smaller viewports */
+    margin-right: 1rem;
+  }
+
+  .bentoBody {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+
+  .secondarySnap1,
+  .secondarySnap2 {
+    display: none; /* Hide snapshots on smaller heights to preserve readability */
+  }
+
+  .infoCard {
+    height: auto;
+  }
+
+  .mainCanvas {
+    height: 220px;
+  }
+
+  .cardFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 12px;
+  }
+
+  .footerTags {
+    width: 100%;
+  }
+
+  .viewRepoBtn {
+    width: 100%;
+  }
+}

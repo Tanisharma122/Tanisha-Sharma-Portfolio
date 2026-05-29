@@ -1,0 +1,142 @@
+/* ── Full-viewport fluid section ─────────────────────────────────── */
+.fluidSection {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  background: #020008;
+}
+
+/* Custom cursor dot — follows the pointer */
+.fluidSection::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 122, 0, 0.85);
+  box-shadow:
+    0 0 12px rgba(255, 122, 0, 0.8),
+    0 0 32px rgba(255, 122, 0, 0.4);
+  pointer-events: none;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  /* Positioned via JS if needed — currently decorative */
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+}
+
+/* ── WebGL canvas ─────────────────────────────────────────────────── */
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+}
+
+/* ── Overlay content ──────────────────────────────────────────────── */
+.content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 clamp(24px, 8vw, 120px);
+  /* Glass-like dark panel underneath text */
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 50%,
+    rgba(2, 0, 20, 0.25) 0%,
+    rgba(2, 0, 8, 0.0) 100%
+  );
+  pointer-events: none;
+}
+
+/* ── Eyebrow ─────────────────────────────────────────────────────── */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: clamp(10px, 1.1vw, 12px);
+  font-weight: 500;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: #FF7A00;
+  margin: 0 0 20px;
+  opacity: 0.9;
+  animation: fadeUp 1s ease 0.3s both;
+}
+
+/* ── Heading ─────────────────────────────────────────────────────── */
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 6.5vw, 96px);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: transparent;
+  background: linear-gradient(
+    135deg,
+    #ffffff  0%,
+    #d8ccff 40%,
+    #a08cff 65%,
+    #ffffff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  margin: 0 0 28px;
+  animation: fadeUp 1s ease 0.5s both;
+}
+
+/* ── Subtext ─────────────────────────────────────────────────────── */
+.sub {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.5vw, 18px);
+  font-weight: 400;
+  line-height: 1.75;
+  color: rgba(210, 205, 240, 0.70);
+  max-width: 540px;
+  margin: 0;
+  animation: fadeUp 1s ease 0.7s both;
+}
+
+/* ── Bottom edge fade into next section ──────────────────────────── */
+.fluidSection::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, #04000e);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ── Entrance animation ───────────────────────────────────────────── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Responsive ───────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .fluidSection {
+    height: 100svh;
+    cursor: auto;
+  }
+
+  .heading {
+    font-size: clamp(32px, 9vw, 56px);
+  }
+}

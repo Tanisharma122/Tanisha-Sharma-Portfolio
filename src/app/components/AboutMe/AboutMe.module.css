@@ -1,0 +1,268 @@
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000; /* Pure bold absolute black background */
+  padding: clamp(100px, 15vh, 180px) clamp(24px, 8vw, 120px);
+  overflow: hidden;
+}
+
+/* Ambient orange backing glow under profile image circle */
+.section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(255, 122, 0, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grid {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(40px, 6vw, 100px);
+  align-items: center;
+}
+
+/* ── LEFT COLUMN: ASYMMETRIC PORTRAIT ANCHOR ─────────────────────── */
+.leftCol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileCircle {
+  position: relative;
+  width: clamp(320px, 34vw, 440px);
+  height: clamp(320px, 34vw, 440px);
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(10, 3, 28, 0.6) 0%, rgba(4, 4, 6, 0.98) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 100px rgba(255, 122, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible; /* lets portrait spill over the circle for 3D popup depth */
+  will-change: transform;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.profileCircle:hover {
+  border-color: rgba(255, 122, 0, 0.6);
+  box-shadow: 
+    0 0 120px rgba(255, 122, 0, 0.55),
+    0 0 50px rgba(255, 122, 0, 0.25);
+}
+
+.profileImage {
+  position: absolute;
+  bottom: -2%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110%;
+  height: auto;
+  max-height: 140%; /* image extends well above the circle for popup effect */
+  object-fit: contain;
+  object-position: bottom center;
+  z-index: 2;
+  pointer-events: none;
+  transform-origin: bottom center;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Drop shadow to enhance the 'coming out of circle' 3D depth */
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.5));
+}
+
+.profileCircle:hover .profileImage {
+  transform: translateX(-50%) scale(1.05) translateY(-4px); /* lifts slightly on hover */
+}
+
+.clippedWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.overflowWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.overflowImage {
+  clip-path: inset(0 0 35% 0);
+}
+
+/* ── RIGHT COLUMN: KINETIC TEXT-FILL & CREDENTIALS ─────────────── */
+.rightCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: clamp(10px, 1.1vw, 12px);
+  font-weight: 500;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: #FF7A00; /* signature orange */
+  margin-bottom: 24px;
+  display: inline-block;
+  opacity: 0.95;
+  text-shadow: 0 0 15px rgba(255, 122, 0, 0.3);
+}
+
+/* Overlapping kinetic text wrapper */
+.headingWrapper {
+  position: relative;
+  margin-bottom: 2rem;
+  width: max-content;
+}
+
+.headingHollow {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 7.5vw, 6.8rem);
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.45);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.headingFill {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 7.5vw, 6.8rem);
+  font-weight: 900;
+  color: #ffffff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin: 0;
+  clip-path: inset(0 0 100% 0); /* initially completely hollow/clipped */
+  white-space: nowrap;
+  will-change: clip-path;
+  text-shadow: 0 0 35px rgba(255, 255, 255, 0.3);
+}
+
+.bioText {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.35vw, 17px);
+  line-height: 1.8;
+  color: #cbd5e1; /* highly legible soft slate-white */
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  margin-top: 0;
+}
+
+/* ── SUB-GRID CREDENTIALS TABLE ─────────────────────────────────── */
+.metaGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.2rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 2.5rem;
+}
+
+.metaRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.metaRowFullWidth {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.metaRowLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #FF7A00; /* signature orange */
+  letter-spacing: 0.18em;
+}
+
+.metaRowValue {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: #f1f5f9; /* clean soft white */
+  line-height: 1.6;
+}
+
+/* ── RESPONSIVE STYLES ───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .section {
+    padding: clamp(80px, 10vh, 120px) clamp(16px, 4vw, 40px);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .leftCol {
+    order: 1; /* display portrait on top for mobile screens */
+  }
+
+  .rightCol {
+    order: 2;
+  }
+
+  .headingWrapper {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .bioText {
+    text-align: center;
+  }
+
+  .metaGrid {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+    padding-top: 2rem;
+  }
+
+  .metaRowFullWidth {
+    grid-column: span 1;
+  }
+
+  .metaRow {
+    align-items: center;
+    text-align: center;
+  }
+}

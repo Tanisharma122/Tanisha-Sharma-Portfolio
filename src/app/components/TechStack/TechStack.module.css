@@ -1,0 +1,191 @@
+/* ── TECH STACK SECTION ─────────────────────────────────────────────── */
+.section {
+  position: relative;
+  width: 100%;
+  background: #000000;
+  padding: clamp(80px, 12vh, 160px) 0;
+  overflow: hidden;
+}
+
+/* Subtle ambient divider at the top */
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
+}
+
+.container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 8vw, 120px);
+  margin-bottom: 60px;
+}
+
+.eyebrowTech {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #FF7A00; /* signature orange for emphasis */
+}
+
+
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   MARQUEE SYSTEM — 3 infinite-scrolling tech rows
+   ══════════════════════════════════════════════════════════════════════ */
+.marqueeWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: clamp(60px, 10vh, 120px);
+}
+
+.marqueeRow {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  padding: 18px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  user-select: none;
+}
+
+.marqueeRow:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.marqueeTrack {
+  display: flex;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.marqueeItem {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.8vw, 40px);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0.30;
+  padding: 0 clamp(14px, 2.2vw, 32px);
+  letter-spacing: -0.015em;
+  transition:
+    opacity 0.4s var(--ease-cinematic),
+    text-shadow 0.4s var(--ease-cinematic),
+    color 0.4s var(--ease-cinematic);
+}
+
+.marqueeItem:hover {
+  opacity: 1;
+  color: #fff;
+  text-shadow:
+    0 0 24px rgba(255, 255, 255, 0.5),
+    0 0 60px rgba(255, 255, 255, 0.15);
+}
+
+/* Decorative diamond separator between tech names */
+.separator {
+  color: rgba(255, 255, 255, 0.12);
+  margin-left: clamp(14px, 2.2vw, 32px);
+  font-family: var(--font-mono);
+  font-size: 0.4em;
+  font-weight: 300;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   MASSIVE CENTERED "PROJECTS" HEADING
+   ══════════════════════════════════════════════════════════════════════ */
+.headingWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: clamp(40px, 8vh, 100px) 0;
+}
+
+/* Hollow outlined base layer */
+.headingHollow {
+  font-family: 'Inter', 'Plus Jakarta Sans', var(--font-display), -apple-system, sans-serif;
+  font-size: clamp(3.5rem, 10vw, 10rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.12);
+  user-select: none;
+  text-align: center;
+}
+
+/* Solid fill layer — animated via GSAP scroll clip-path */
+.headingFill {
+  position: absolute;
+  font-family: 'Inter', 'Plus Jakarta Sans', var(--font-display), -apple-system, sans-serif;
+  font-size: clamp(3.5rem, 10vw, 10rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: #ffffff;
+  text-align: center;
+  /* Start clipped — GSAP will animate clipPath from inset(0 100% 0 0) → inset(0 0% 0 0) */
+  clip-path: inset(0 100% 0 0);
+  text-shadow:
+    0 0 40px rgba(255, 255, 255, 0.08),
+    0 0 80px rgba(255, 255, 255, 0.04);
+  user-select: none;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .section {
+    padding: clamp(50px, 8vh, 100px) 0;
+  }
+
+  .marqueeWrapper {
+    margin-bottom: 40px;
+  }
+
+  .marqueeRow {
+    padding: 12px 0;
+  }
+
+  .marqueeItem {
+    font-size: clamp(14px, 4.5vw, 24px);
+    padding: 0 12px;
+  }
+
+  .separator {
+    margin-left: 12px;
+  }
+
+  .headingWrapper {
+    padding: 30px 0;
+  }
+
+  .headingHollow,
+  .headingFill {
+    font-size: clamp(2.5rem, 12vw, 5rem);
+    -webkit-text-stroke-width: 1.5px;
+  }
+}

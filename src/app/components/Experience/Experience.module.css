@@ -1,0 +1,348 @@
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #fbfbfd 0%, #f5f6f9 100%);
+  padding: clamp(140px, 18vh, 220px) clamp(24px, 8vw, 120px) clamp(100px, 12vh, 160px) clamp(24px, 8vw, 120px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Subtle slate background grid overlay */
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  opacity: 0.7;
+  z-index: 0;
+}
+
+/* Smooth Curved SVG Transition Divider linking Section 2 to 3 */
+.curveDivider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.curveSvg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 100%;
+  transform: rotate(0deg);
+}
+
+/* 3D Canvas Graphic Absolute Positioning Container (Shifted down and right) */
+.canvasContainer {
+  position: absolute;
+  right: -120px; /* Shifted further toward right viewport edge */
+  top: 55%; /* Shifted slightly down to balance text grid boundaries */
+  transform: translateY(-50%);
+  width: 450px;
+  height: 450px;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── HEADER ──────────────────────────────────────────────────────── */
+.headerBlock {
+  margin-bottom: clamp(60px, 10vh, 120px);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: clamp(10px, 1.1vw, 12px);
+  font-weight: 700;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: #FF7A00; /* signature orange color marker */
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5.5vw, 68px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: #111111; /* deep charcoal / matte black */
+  margin: 0;
+}
+
+/* ── TIMELINE CONTAINER ──────────────────────────────────────────── */
+.timelineContainer {
+  position: relative;
+  padding-left: clamp(40px, 8vw, 100px);
+}
+
+/* The static gray backbone line track */
+.backboneTrack {
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 6px;
+  width: 2px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 999px;
+  z-index: 1;
+}
+
+/* The active dynamic colored line track that fills on scroll */
+.activeTrack {
+  position: absolute;
+  top: 10px;
+  left: 6px;
+  width: 2px;
+  height: 0%; /* Dynamic height mapped via GSAP */
+  background: linear-gradient(to bottom, #FF7A00 0%, #ff9500 100%);
+  box-shadow: 0 0 8px rgba(255, 122, 0, 0.3);
+  border-radius: 999px;
+  z-index: 2;
+  transform-origin: top;
+  will-change: height;
+}
+
+/* ── EXPERIENCE ITEMS ────────────────────────────────────────────── */
+.timelineStack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(60px, 8vh, 100px);
+}
+
+.itemRow {
+  position: relative;
+  width: 100%;
+}
+
+/* The node points that sit directly on the track line */
+.nodePoint {
+  position: absolute;
+  top: 28px;
+  left: -94px; /* Center aligned to track */
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fbfbfd;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  z-index: 3;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+}
+
+/* Active node state when illuminated by ScrollTrigger */
+.nodePointActive {
+  background: #FF7A00;
+  border-color: #fbfbfd;
+  box-shadow: 
+    0 0 12px #FF7A00,
+    0 0 20px rgba(255, 122, 0, 0.4);
+}
+
+/* The card blocks containing job details */
+.cardBlock {
+  position: relative;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  padding: 32px clamp(20px, 4vw, 40px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  cursor: default;
+  transition: border-color 0.3s ease;
+}
+
+/* Card inside layout details */
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.jobTitle {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 800;
+  color: #111111; /* deep charcoal / matte black */
+  letter-spacing: -0.015em;
+  margin: 0;
+  padding-right: 48px; /* Safe space to prevent overlap with LinkedIn corner anchor */
+}
+
+.period {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #FF7A00;
+  background: rgba(255, 122, 0, 0.07);
+  border: 1px solid rgba(255, 122, 0, 0.15);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+
+.company {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #FF7A00; /* signature orange accent */
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.summaryText {
+  font-family: var(--font-body);
+  font-size: clamp(13px, 1.2vw, 15px);
+  line-height: 1.75;
+  color: #444444; /* highly legible slate gray */
+  margin: 0;
+}
+
+/* ── CURRENT ENGAGEMENTS CUSTOM HIGHLIGHT ───────────────────────── */
+.engagementCard {
+  border-left: 3px solid #FF7A00 !important;
+}
+
+/* ── LINKEDIN REDIRECT ANCHOR ────────────────────────────────────── */
+.linkedinAnchor {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.45);
+  transition: 
+    transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    color 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  z-index: 5;
+}
+
+.linkedinAnchor:hover {
+  transform: scale(1.18);
+  background: rgba(255, 122, 0, 0.08);
+  border-color: rgba(255, 122, 0, 0.3);
+  color: #FF7A00; /* glow with signature orange */
+  box-shadow: 0 0 15px rgba(255, 122, 0, 0.25);
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .canvasContainer {
+    display: none; /* Hide 3D mesh on mobile to ensure readable layouts and smooth viewport scroll performance */
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-top: clamp(100px, 14vh, 160px);
+  }
+
+  .curveDivider {
+    height: 80px; /* shorter divider curve height on mobile */
+  }
+
+  .timelineContainer {
+    padding-left: 32px;
+  }
+
+  .backboneTrack {
+    left: 2px;
+  }
+
+  .activeTrack {
+    left: 2px;
+  }
+
+  .nodePoint {
+    left: -32px;
+    width: 10px;
+    height: 10px;
+    top: 30px;
+  }
+
+  .metaRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .period {
+    padding: 2px 8px;
+  }
+  
+  .linkedinAnchor {
+    top: 20px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* ── 3D COMPONENT SCROLL GUIDE ARROW ────────────────────────────── */
+.arrowContainer {
+  position: absolute;
+  bottom: 5%;
+  right: 8%;
+  width: 150px;
+  height: 150px;
+  z-index: 5;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.3s ease;
+  will-change: transform, filter;
+}
+
+.arrowContainer canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .arrowContainer {
+    bottom: 2%;
+    right: 4%;
+    width: 100px;
+    height: 100px;
+  }
+}
+
