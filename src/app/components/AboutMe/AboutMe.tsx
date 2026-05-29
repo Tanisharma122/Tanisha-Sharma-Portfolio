@@ -98,7 +98,7 @@ export default function AboutMe() {
           </div>
 
           <p className={styles.bioText}>
-            I am a Computer Engineering student specializing in Artificial Intelligence, Machine Learning, and Computer Vision. I focus on engineering intelligent systems, robust automation workflows, and deep-learning architectures that bridge academic research with real-world digital applications.
+            I am a 5th-semester Computer Engineering student specializing in Artificial Intelligence, Machine Learning, and Computer Vision. I focus on engineering intelligent systems, robust automation workflows, and deep-learning architectures that bridge academic research with real-world digital applications.
           </p>
 
           {/* Minimal 2-column secondary data table */}
@@ -110,6 +110,13 @@ export default function AboutMe() {
               </span>
             </div>
             
+            <div className={styles.metaRow}>
+              <span className={styles.metaRowLabel}>Semester</span>
+              <span className={styles.metaRowValue}>
+                <strong>5th Semester</strong>
+              </span>
+            </div>
+
             <div className={styles.metaRow}>
               <span className={styles.metaRowLabel}>Cohort</span>
               <span className={styles.metaRowValue}>
